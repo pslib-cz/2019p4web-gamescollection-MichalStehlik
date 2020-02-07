@@ -10,15 +10,34 @@
 </div>
 
 <ul>
-    <li>All companies</li>
-    <li>Companies not owned by anyone else</li>
-    <li>Companies from United States, France, Czechia, Poland, Sweden, Germany</li>
+    <li><a asp-page="./Index">All companies</a></li>
+    <li>Companies <a asp-page="./Index" asp-route-ownerFilter="0">not owned by anyone else</a></li>
+    <li>Companies from <a asp-page="./Index" asp-route-countryFilter="US">United States</a>, <a asp-page="./Index" asp-route-countryFilter="FR">France</a>, <a asp-page="./Index" asp-route-countryFilter="CZ">Czechia</a>, <a asp-page="./Index" asp-route-countryFilter="PL">Poland</a>, <a asp-page="./Index" asp-route-countryFilter="SE">Sweden</a>, <a asp-page="./Index" asp-route-countryFilter="GE">Germany</a></li>
 </ul>
 
 <form asp-page="./Index" method="get" class="form-inline">
 
 </form>
 
-<table class="table">
-
+<table class="table table-responsive table-striped table-hover w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var company in Model.Companies)
+    {
+        <tr>
+            <td><a asp-page="./Details" asp-route-id="@company.Id">@company.Name</a></td>
+            <td>@company.CountryCode</td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@company.Id" class="btn btn-sm btn-info">Detail</a>
+                <a asp-page="./Index" asp-route-ownerFilter="@company.Id" class="btn btn-sm btn-light">Subsidiaries</a>
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>

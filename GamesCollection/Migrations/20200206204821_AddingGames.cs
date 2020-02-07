@@ -85,7 +85,7 @@ namespace GamesCollection.Migrations
                 column: "GameId",
                 principalTable: "Games",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GameGenres_Genres_GenreId",
@@ -93,7 +93,7 @@ namespace GamesCollection.Migrations
                 column: "GenreId",
                 principalTable: "Genres",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Games_Companies_DeveloperId",
@@ -101,7 +101,7 @@ namespace GamesCollection.Migrations
                 column: "DeveloperId",
                 principalTable: "Companies",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Games_Companies_PublisherId",
@@ -109,7 +109,7 @@ namespace GamesCollection.Migrations
                 column: "PublisherId",
                 principalTable: "Companies",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

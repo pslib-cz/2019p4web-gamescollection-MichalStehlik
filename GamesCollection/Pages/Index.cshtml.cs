@@ -30,7 +30,26 @@ namespace GamesCollection.Pages
                 "CZ", "FR", "GE", "PL", "SE", "US"
             });
             IQueryable<Company> companies = _context.Companies;
-            Companies = new List<Company>();
+            if (nameFilter != null)
+            {
+                companies = companies.Where((c) => (c.Name.Contains(nameFilter)));
+            }
+            if (countryFilter != null)
+            {
+                companies = companies.Where((c) => (c.CountryCode == countryFilter));
+            }
+            if (ownerFilter != null)
+            {
+                if (ownerFilter != 0)
+                {
+                    companies = companies.Where((c) => (c.ParentId == ownerFilter));
+                }
+                else
+                {
+                    companies = companies.Where((c) => (c.ParentId == null));
+                }
+            }
+            Companies = companies.ToList();
         }
     }
 }

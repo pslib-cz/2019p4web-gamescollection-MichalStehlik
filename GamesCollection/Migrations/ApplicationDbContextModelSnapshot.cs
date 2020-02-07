@@ -168,7 +168,7 @@ namespace GamesCollection.Migrations
                             CountryCode = "US",
                             Name = "Obsidian Entertainment",
                             ParentId = 2,
-                            Website = "https://www.firaxis.com/"
+                            Website = "https://www.obsidinenterteinment.com/"
                         },
                         new
                         {
@@ -605,13 +605,13 @@ namespace GamesCollection.Migrations
                     b.HasOne("GamesCollection.Models.Company", "Developer")
                         .WithMany()
                         .HasForeignKey("DeveloperId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GamesCollection.Models.Company", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -620,13 +620,13 @@ namespace GamesCollection.Migrations
                     b.HasOne("GamesCollection.Models.Game", "Game")
                         .WithMany("Genres")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GamesCollection.Models.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
