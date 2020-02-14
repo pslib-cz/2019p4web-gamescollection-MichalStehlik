@@ -9,15 +9,55 @@
     <dt>Name</dt>
     <dd>@Model.Company.Name</dd>
     <dt>Country</dt>
-    <dd>Model.Company.Country</dd>
+    <dd>@Model.Company.CountryCode</dd>
     <dt>Website</dt>
     <dd><a href="@Model.Company.Website">@Model.Company.Website</a></dd>
+    @if (Model.Company.Parent != null)
+    {
+        <dt>Parent Company</dt>
+        <dd><a asp-route-id="@Model.Company.ParentId">@Model.Company.Parent.Name</a></dd>
+    }
 </dl>
 <h2>Subsidiaries</h2>
-<ul>
-</ul>
-<h2>Games</h2>
-<ul>
-</ul>
-
+@if (Model.Subsidiaries.Count == 0)
+{
+    <p>Company has no subsidiaries</p>
+}
+else
+{
+    <ul>
+        @foreach (var comp in Model.Subsidiaries)
+        {
+            <li><a asp-route-id="@comp.Id">@comp.Name</a></li>
+        }
+    </ul>
+}
+<h2>Games developed</h2>
+@if (Model.GamesDeveloped.Count == 0)
+{
+    <p>Company did not developed any games.</p>
+}
+else
+{
+    <ul>
+        @foreach (var gd in Model.GamesDeveloped)
+        {
+            <li><a asp-page="./Game" asp-route-id="@gd.Id">@gd.Name</a></li>
+        }
+    </ul>
+}
+<h2>Games published</h2>
+@if (Model.GamesPublished.Count == 0)
+{
+    <p>Company did not published any games.</p>
+}
+else
+{
+    <ul>
+        @foreach (var gd in Model.GamesPublished)
+        {
+            <li><a asp-page="./Game" asp-route-id="@gd.Id">@gd.Name</a></li>
+        }
+    </ul>
+}
 

@@ -7,15 +7,24 @@
 <h1>Game</h1>
 <dl>
     <dt>Name</dt>
-    <dd></dd>
+    <dd>@Model.Game.Name</dd>
     <dt>Website</dt>
-    <dd></dd>
-    <dt>YouTube</dt>
-    <dd></dd>
-    <dt>Developer</dt>
-    <dd></dd>
-    <dt>Publisher</dt>
-    <dd></dd>
+    <dd>@Model.Game.Website</dd>
+    @if (Model.Game.YouTubeChannel != null)
+    {
+        <dt>YouTube</dt>
+        <dd>@Model.Game.YouTubeChannel</dd>
+    }
+    @if (Model.Game.Developer != null)
+    {
+        <dt>Developer</dt>
+        <dd><a asp-page="Details" asp-route-id="@Model.Game.Developer.Id">@Model.Game.Developer.Name</a></dd>
+    }
+    @if (Model.Game.Publisher != null)
+    {
+        <dt>Publisher</dt>
+        <dd><a asp-page="Details" asp-route-id="@Model.Game.Publisher.Id">@Model.Game.Publisher.Name</a></dd>
+    }
 </dl>
 <h2>Genres</h2>
 <ul>
