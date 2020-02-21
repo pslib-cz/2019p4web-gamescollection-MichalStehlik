@@ -14,16 +14,65 @@
     <li>Companies <a asp-page="./Index" asp-route-ownerFilter="0">not owned by anyone else</a></li>
     <li>Companies from <a asp-page="./Index" asp-route-countryFilter="US">United States</a>, <a asp-page="./Index" asp-route-countryFilter="FR">France</a>, <a asp-page="./Index" asp-route-countryFilter="CZ">Czechia</a>, <a asp-page="./Index" asp-route-countryFilter="PL">Poland</a>, <a asp-page="./Index" asp-route-countryFilter="SE">Sweden</a>, <a asp-page="./Index" asp-route-countryFilter="GE">Germany</a></li>
 </ul>
-
+<div><a class="btn btn-success" asp-page="Companies/Create">Create new</a></div>
 <form asp-page="./Index" method="get" class="form-inline">
-
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="sr-only"
+                   for="inlineFormInput"
+                   asp-for="@Model.NameFilter">Name</label>
+            <input type="text" class="form-control mb-2"
+                   asp-for="@Model.NameFilter"
+                   id="inlineFormInput" placeholder="Bethesda">
+        </div>
+        <div class="col-auto">
+            <label class="sr-only"
+                   for="inlineFormInput"
+                   asp-for="@Model.CountryFilter">Name</label>
+            <select class="form-control mb-2" 
+                    asp-for="@Model.CountryFilter"
+                    asp-items="@Model.CountriesList">
+                <option value="">-- All --</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Filter</button>
+            <a class="btn btn-secondary mb-2" asp-page="Index">All</a>
+        </div>
+    </div>
 </form>
 
 <table class="table table-responsive table-striped table-hover w-100">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Country</th>
+            @if (Model.Order == CompaniesSortOrder.Name)
+            {
+                <th><a asp-route-order="NameDescending" 
+                       asp-route-nameFilter="@Model.NameFilter"
+                       asp-route-countryFilter="@Model.CountryFilter"
+                >Name</a></th>
+            }
+            else
+            {
+                <th><a asp-route-order="Name"
+                     asp-route-nameFilter="@Model.NameFilter"
+                     asp-route-countryFilter="@Model.CountryFilter"
+                >Name</a></th>
+            }
+            @if (Model.Order == CompaniesSortOrder.Country)
+            {
+                <th><a asp-route-order="CountryDescending"
+                     asp-route-nameFilter="@Model.NameFilter"
+                     asp-route-countryFilter="@Model.CountryFilter"  
+                >Country</a></th>
+            }
+            else
+            {
+                <th><a asp-route-order="Country"
+                     asp-route-nameFilter="@Model.NameFilter"
+                     asp-route-countryFilter="@Model.CountryFilter" 
+                >Country</a></th>
+            }
             <th>Action</th>
         </tr>
     </thead>

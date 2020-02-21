@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace GamesCollection
+namespace GamesCollection.Companies
 {
     public class DetailsModel : PageModel
     {
